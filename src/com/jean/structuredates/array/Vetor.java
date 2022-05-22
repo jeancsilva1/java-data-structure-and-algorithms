@@ -30,10 +30,32 @@ public class Vetor {
 		else {
 			throw new Exception("Vetor já está cheio");
 		}
+		this.aumentaCapacidade();
 	
 	}
 	
+	private void aumentaCapacidade() {
+		if(this.tamanho == this.elementos.length) {
+			String[] elementosNovos = new String[this.elementos.length * 2];
+			for(int i = 0; i<this.elementos.length; i++) {
+				elementosNovos[i] = this.elementos[i];
+			}
+			this.elementos = elementosNovos;
+		}
+	}
+	
+	public void remove(int posicao) {
+		if(!(posicao >=0 && posicao < tamanho)) {
+			throw new IllegalArgumentException("Posicao Iválida");
+		}
+		for(int i = posicao; i<this.tamanho -1; i++) {
+			this.elementos[i] = this.elementos[i+1];
+		}
+		this.tamanho--;
+	}
+	
 	public boolean adiciona(int posicao, String elemento) {
+		this.aumentaCapacidade();
 		if(!(posicao >=0 && posicao < tamanho)) {
 			throw new IllegalArgumentException("Posicao Iválida");
 		}
