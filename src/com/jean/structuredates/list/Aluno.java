@@ -87,15 +87,15 @@ public class Aluno {
 
 	public String aprovado() {
 		if(this.media() >= 50 && this.media() <=70) {
-			return "Aluno está de recuperação";
+			return Resultado.RECUPARACAO;
 		}
 		else if (this.media() >70){
-			return "Aprovado";
+			return Resultado.APROVADO;
 			
 		}
 		
 		else {
-			return "Reprovado";
+			return Resultado.REPROVADO;
 		}
 		
 	}

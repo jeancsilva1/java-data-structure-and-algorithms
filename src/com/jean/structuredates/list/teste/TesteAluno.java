@@ -2,7 +2,8 @@ package com.jean.structuredates.list.teste;
 
 import com.jean.structuredates.list.Aluno;
 import com.jean.structuredates.list.Disciplina;
-import com.jean.structuredates.list.Lista;
+import com.jean.structuredates.list.Resultado;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,12 @@ public class TesteAluno {
 	public static void main(String[] args) {
 
 		List<Aluno> alunos = new ArrayList<>();
+		List<Disciplina> disciplinas = new ArrayList<>();
+		List<Aluno> alunosAprovados = new ArrayList<>();
+		List<Aluno> alunosReprovados = new ArrayList<>();
+		List<Aluno> alunosRecuperacao = new ArrayList<>();
 
-		for (int i = 1; i <= 2; i++) {
+		for (int i = 1; i <= 4; i++) {
 			Aluno aluno = new Aluno();
 			aluno.setNome(JOptionPane.showInputDialog("Qual o nome do Aluno?"));
 			aluno.setIdade(Integer.valueOf(JOptionPane.showInputDialog("Qual a sua idade?")));
@@ -46,6 +51,36 @@ public class TesteAluno {
 
 			alunos.add(aluno);
 		}
+		
+		for (Aluno aluno : alunos) {
+			if(aluno.aprovado().equals(Resultado.APROVADO)) {
+				alunosAprovados.add(aluno);
+			} else if(aluno.aprovado().equals(Resultado.REPROVADO)) {
+				alunosReprovados.add(aluno);
+			}
+			
+			else {
+				alunosRecuperacao.add(aluno);
+			}
+			
+		}
+		
+		for (Aluno aluno : alunosRecuperacao) {
+			JOptionPane.showMessageDialog(null,"Alunos em recuperação:\n" + aluno.getNome());
+			
+		}
+		
+		for (Aluno aluno : alunosReprovados) {
+			JOptionPane.showMessageDialog(null,"Alunos Reprovados:\n" + aluno.getNome());
+			
+		}
+		
+		for (Aluno aluno : alunosAprovados) {
+			JOptionPane.showMessageDialog(null,"Alunos Aprovados:\n" + aluno.getNome());
+			
+		}
+		
+		
 		for (Aluno aluno2 : alunos) {
 			if(aluno2.getNome().equalsIgnoreCase("jean")){
 			JOptionPane.showMessageDialog(null, aluno2);
