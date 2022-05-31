@@ -5,6 +5,7 @@ import com.jean.structuredates.list.Disciplina;
 import com.jean.structuredates.list.Resultado;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -14,10 +15,13 @@ public class TesteAluno {
 	public static void main(String[] args) {
 
 		List<Aluno> alunos = new ArrayList<>();
-		List<Disciplina> disciplinas = new ArrayList<>();
+		HashMap<String, List<Aluno>> maps = new HashMap<>();
+		
+		/*Comentando lista pra utilizar HASHMAP
 		List<Aluno> alunosAprovados = new ArrayList<>();
 		List<Aluno> alunosReprovados = new ArrayList<>();
 		List<Aluno> alunosRecuperacao = new ArrayList<>();
+		*/
 
 		for (int i = 1; i <= 4; i++) {
 			Aluno aluno = new Aluno();
@@ -52,30 +56,46 @@ public class TesteAluno {
 			alunos.add(aluno);
 		}
 		
+		maps.put(Resultado.APROVADO, new ArrayList<Aluno>());
+		maps.put(Resultado.REPROVADO, new ArrayList<Aluno>());
+		maps.put(Resultado.RECUPARACAO, new ArrayList<Aluno>());
+		
 		for (Aluno aluno : alunos) {
 			if(aluno.aprovado().equals(Resultado.APROVADO)) {
+				maps.get(Resultado.APROVADO).add(aluno);
+				/*
+				 * comentando para utilizar o HASHMAP
 				alunosAprovados.add(aluno);
+				*/
 			} else if(aluno.aprovado().equals(Resultado.REPROVADO)) {
+				/*
+				 * comentando para utilizar o HASHMAP
 				alunosReprovados.add(aluno);
+				*/
+				maps.get(Resultado.REPROVADO).add(aluno);
 			}
 			
 			else {
+				/*
+				 * comentando para utilizar o HASHMAP
 				alunosRecuperacao.add(aluno);
+				*/
+				maps.get(Resultado.REPROVADO).add(aluno);
 			}
 			
 		}
 		
-		for (Aluno aluno : alunosRecuperacao) {
+		for (Aluno aluno : maps.get(Resultado.RECUPARACAO)) {
 			JOptionPane.showMessageDialog(null,"Alunos em recuperação:\n" + aluno.getNome());
 			
 		}
 		
-		for (Aluno aluno : alunosReprovados) {
+		for (Aluno aluno : maps.get(Resultado.REPROVADO)) {
 			JOptionPane.showMessageDialog(null,"Alunos Reprovados:\n" + aluno.getNome());
 			
 		}
 		
-		for (Aluno aluno : alunosAprovados) {
+		for (Aluno aluno : maps.get(Resultado.APROVADO)) {
 			JOptionPane.showMessageDialog(null,"Alunos Aprovados:\n" + aluno.getNome());
 			
 		}
